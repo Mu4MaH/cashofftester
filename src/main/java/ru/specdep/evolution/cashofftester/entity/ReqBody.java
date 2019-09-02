@@ -1,12 +1,18 @@
 package ru.specdep.evolution.cashofftester.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.specdep.evolution.cashofftester.service.IfNull;
 
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReqBody {
+
+    IfNull ifNull = new IfNull();
 
     @JsonProperty("session")
     private Session session;
@@ -32,7 +38,7 @@ public class ReqBody {
 
     @Override
     public String toString() {
-        return "{ session:" + session.toString() + ", @method: " + method + ", @service: " + service + ", @rid: " + rid + "}";
+        return "{\"session\":" + session.toString() + ",\"@method\":" + ifNull.checkNull(method) + ",\"@service\":\"" + service + "\",\"@rid\":\"" + rid + "\"}";
     }
 
     public Session getSession() {

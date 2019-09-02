@@ -1,12 +1,18 @@
 package ru.specdep.evolution.cashofftester.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.specdep.evolution.cashofftester.service.IfNull;
 
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Session {
+
+    IfNull ifNull = new IfNull();
 
     @JsonProperty("@id")
     private String id;
@@ -52,6 +58,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return " {id: " + id + ", create: " + create + ", institution: " + institution + "}";
+        return "{\"@id\":" + ifNull.checkNull(id) + ",\"@create\":\"" + create + "\",\"@institution\":\"" + institution + "\"}";
     }
 }

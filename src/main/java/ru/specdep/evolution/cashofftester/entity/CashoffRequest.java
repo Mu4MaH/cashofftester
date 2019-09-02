@@ -1,6 +1,7 @@
 package ru.specdep.evolution.cashofftester.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CashoffRequest {
 
     @JsonProperty("request")
@@ -32,6 +34,6 @@ public class CashoffRequest {
 
     @Override
     public String toString() {
-        return "{request:" + requestBody.toString() + " }";
+        return "{\"request\":" + requestBody.toString() + "}";
     }
 }
