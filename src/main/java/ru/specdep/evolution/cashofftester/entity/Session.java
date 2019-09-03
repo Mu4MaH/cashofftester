@@ -12,7 +12,8 @@ import ru.specdep.evolution.cashofftester.service.IfNull;
 //@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Session {
 
-    IfNull ifNull = new IfNull();
+    @Autowired
+    IfNull ifNull;
 
     @JsonProperty("@id")
     private String id;
